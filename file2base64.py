@@ -57,12 +57,19 @@ def file_decode(*file_paths):
                     raw = eval(rf.read())
                     decoded = b64decode(raw)
                     wf.write(decoded)
-        print(f'=>{recovered_file_path}<=')
+        print(f'=>{recovered_file_path}')
     else:
         print('No valid file provided')
 
 def decode_by_file_name(file_name:str):
-    file_list = glob(f'*{file_name}*.64.*')
+    '''
+    decode wrapper, accepts fuzzy file pattern to match all chunks' file name
+    :param file_name: directory + partial characters in file name shared by all chunk files
+    :return: None, write decoded file to original directory
+    '''
+    dir_name = path.dirname(file_name)
+    file_pattern = path.basename(file_name)
+    file_list = glob(path.join(dir_name, f'*{file_pattern}*.64.*'))
     if file_list:
         file_decode(*file_list)
     else:
