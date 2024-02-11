@@ -144,7 +144,7 @@ if __name__ == '__main__':
                         help='Maximum size in MB to separate the original file into chunks, '
                              'uses with --split. Be noted that chunks in base64 format could be larger than the raw bytes')
     parser.add_argument('--password', action='store', default='',
-                        help='Enable encryption and decryption for split and merge respectively')
+                        help='Enable encryption and decryption for --split and --merge respectively')
 
     args = parser.parse_args()
     if args.split and args.merge:
